@@ -1,6 +1,7 @@
 const lCampoDeEntradaDoItemDeCompra = document.getElementById("input-item");
 const lBotaoDeSalvarItem = document.getElementById("adicionar-item");
 const lListaDeCompras = document.getElementById("lista-de-compras");
+const lListaDeItensComprados = document.getElementById("lista-comprados");
 let lNumeroDoItem = 1;
 lBotaoDeSalvarItem.addEventListener("click", adicionarItem);
 
@@ -26,10 +27,15 @@ function adicionarItem(evento){
     lRotuloCheckbox.addEventListener("click", function(evento){
         const checkboxInput = evento.currentTarget.querySelector(".input-checkbox");
         const checkboxCustomizado = evento.currentTarget.querySelector(".checkbox-customizado");
+        const itemTitulo = evento.currentTarget.closest("li").querySelector("#item-titulo");
         if (checkboxInput.checked){
-            checkboxCustomizado.classList.add("checked")   
+            checkboxCustomizado.classList.add("checked"); 
+            itemTitulo.style.textDecoration = "line-through";
+            lListaDeItensComprados.appendChild(lItemDaListaDeCompras);
         } else {
-            checkboxCustomizado.classList.remove("checked")    
+            checkboxCustomizado.classList.remove("checked");   
+            itemTitulo.style.textDecoration = "none"; 
+            lListaDeCompras.appendChild(lItemDaListaDeCompras);
         }
     });
 
@@ -42,6 +48,7 @@ function adicionarItem(evento){
     lConteinerCheckbox.appendChild(lRotuloCheckbox);
 
     const lNomeDoItemDaListaDeCompras = document.createElement("p");
+    lNomeDoItemDaListaDeCompras.id = "item-titulo";
     lNomeDoItemDaListaDeCompras.innerText = lCampoDeEntradaDoItemDeCompra.value;
 
     lContainerDoNomeDoItemDaListaDeCompras.appendChild(lConteinerCheckbox);
