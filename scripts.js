@@ -1,7 +1,7 @@
-const lItemDeCompra = document.getElementById("input-item");
+const lCampoDeEntradaDoItemDeCompra = document.getElementById("input-item");
 const lBotaoDeSalvarItem = document.getElementById("adicionar-item");
 const lListaDeCompras = document.getElementById("lista-de-compras");
-
+let lNumeroDoItem = 2;
 lBotaoDeSalvarItem.addEventListener("click", adicionarItem);
 
 function adicionarItem(evento){
@@ -12,8 +12,30 @@ function adicionarItem(evento){
     lContainerDoItemDaListaDeCompras.classList.add("lista-item-container");
 
     const lContainerDoNomeDoItemDaListaDeCompras = document.createElement("div");
+
+    const lConteinerCheckbox = document.createElement("div");
+    lConteinerCheckbox.classList.add("container-checkbox");
+
+    const lCampoCheckbox = document.createElement("input");
+    lCampoCheckbox.type = "checkbox";
+    lCampoCheckbox.classList.add("input-checkbox");
+    lCampoCheckbox.id = "checkbox-" + lNumeroDoItem++;
+
+    const lRotuloCheckbox = document.createElement("label");
+    lRotuloCheckbox.setAttribute("for", lCampoCheckbox.id);
+
+    const lCampoCheckboxCustomizado = document.createElement("div");
+    lCampoCheckboxCustomizado.classList.add("checkbox-customizado");
+
+    lRotuloCheckbox.appendChild(lCampoCheckbox);
+    lRotuloCheckbox.appendChild(lCampoCheckboxCustomizado);
+
+    lConteinerCheckbox.appendChild(lRotuloCheckbox);
+
     const lNomeDoItemDaListaDeCompras = document.createElement("p");
-    lNomeDoItemDaListaDeCompras.innerText = lItemDeCompra.value;
+    lNomeDoItemDaListaDeCompras.innerText = lCampoDeEntradaDoItemDeCompra.value;
+
+    lContainerDoNomeDoItemDaListaDeCompras.appendChild(lConteinerCheckbox);
     lContainerDoNomeDoItemDaListaDeCompras.appendChild(lNomeDoItemDaListaDeCompras);
 
     const lContainerDosBotoesDoItemDaListaDeCompras = document.createElement("div");
@@ -49,4 +71,5 @@ function adicionarItem(evento){
 
     lItemDaListaDeCompras.appendChild(lDataDaInclusaoDoDoItemNaListaDeCompras);
     lListaDeCompras.appendChild(lItemDaListaDeCompras);
+    lCampoDeEntradaDoItemDeCompra.value = "";
 }
