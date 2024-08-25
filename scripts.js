@@ -92,9 +92,17 @@ function adicionarItem(evento){
 
     const lDataDaInclusaoDoDoItemNaListaDeCompras = document.createElement("p");
     lDataDaInclusaoDoDoItemNaListaDeCompras.classList.add("texto-data");
-    lDataDaInclusaoDoDoItemNaListaDeCompras.innerText = "Quinta-feira (22/08/2024) às 23:30";
+    const lDataEHoraAtual = new Date();
+    const lDiaDaSemanaAtual = iniciarComLetraMaiuscula(lDataEHoraAtual.toLocaleDateString("pt-BR", {weekday: "long"}));
+    const lDataAtual = lDataEHoraAtual.toLocaleDateString(); 
+    const lHoraAtual = lDataEHoraAtual.toLocaleTimeString("pt-BR", {hour: "numeric", minute: "numeric"}); 
+    lDataDaInclusaoDoDoItemNaListaDeCompras.innerText = `${lDiaDaSemanaAtual} (${lDataAtual}) às ${lHoraAtual}`;
 
     lItemDaListaDeCompras.appendChild(lDataDaInclusaoDoDoItemNaListaDeCompras);
     lListaDeCompras.appendChild(lItemDaListaDeCompras);
     lCampoDeEntradaDoItemDeCompra.value = "";
+}
+
+function iniciarComLetraMaiuscula(pTexto){
+    return pTexto.charAt(0).toUpperCase() + pTexto.slice(1)
 }
