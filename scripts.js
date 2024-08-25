@@ -1,7 +1,7 @@
 const lCampoDeEntradaDoItemDeCompra = document.getElementById("input-item");
 const lBotaoDeSalvarItem = document.getElementById("adicionar-item");
 const lListaDeCompras = document.getElementById("lista-de-compras");
-let lNumeroDoItem = 2;
+let lNumeroDoItem = 1;
 lBotaoDeSalvarItem.addEventListener("click", adicionarItem);
 
 function adicionarItem(evento){
@@ -19,10 +19,19 @@ function adicionarItem(evento){
     const lCampoCheckbox = document.createElement("input");
     lCampoCheckbox.type = "checkbox";
     lCampoCheckbox.classList.add("input-checkbox");
-    lCampoCheckbox.id = "checkbox-" + lNumeroDoItem++;
+    lCampoCheckbox.id = `checkbox-${++lNumeroDoItem}`;
 
     const lRotuloCheckbox = document.createElement("label");
     lRotuloCheckbox.setAttribute("for", lCampoCheckbox.id);
+    lRotuloCheckbox.addEventListener("click", function(evento){
+        const checkboxInput = evento.currentTarget.querySelector(".input-checkbox");
+        const checkboxCustomizado = evento.currentTarget.querySelector(".checkbox-customizado");
+        if (checkboxInput.checked){
+            checkboxCustomizado.classList.add("checked")   
+        } else {
+            checkboxCustomizado.classList.remove("checked")    
+        }
+    });
 
     const lCampoCheckboxCustomizado = document.createElement("div");
     lCampoCheckboxCustomizado.classList.add("checkbox-customizado");
@@ -47,6 +56,9 @@ function adicionarItem(evento){
     lImagemDoBotaoRemoverDoItemDaListaDeCompras.alt = "remover";
 
     lBotaoRemoverDoItemDaListaDeCompras.appendChild(lImagemDoBotaoRemoverDoItemDaListaDeCompras);
+    lBotaoRemoverDoItemDaListaDeCompras.addEventListener('click', function() {
+        lItemDaListaDeCompras.remove();
+    });
     
     lContainerDosBotoesDoItemDaListaDeCompras.appendChild(lBotaoRemoverDoItemDaListaDeCompras);
 
@@ -58,6 +70,12 @@ function adicionarItem(evento){
     lImagemDoBotaoEditarDoItemDaListaDeCompras.alt = "editar";
 
     lBotaoEditarDoItemDaListaDeCompras.appendChild(lImagemDoBotaoEditarDoItemDaListaDeCompras);
+    lBotaoEditarDoItemDaListaDeCompras.addEventListener('click', function() {
+        const lNovoValorDoNomeDoItemDaListaDeCompras = prompt('Editar o item:', lNomeDoItemDaListaDeCompras.innerText);
+        if (lNovoValorDoNomeDoItemDaListaDeCompras){
+            lNomeDoItemDaListaDeCompras.innerText = lNovoValorDoNomeDoItemDaListaDeCompras;
+        } 
+    });
     
     lContainerDosBotoesDoItemDaListaDeCompras.appendChild(lBotaoEditarDoItemDaListaDeCompras);
 
